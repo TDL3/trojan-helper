@@ -11,6 +11,11 @@
 ## About
 This is a collection of scripts to automate the installation of [trojan-go], [trojan-r], and more implementations to be added. all implementations are installed with maximum compatibility with the original [trojan-cfw] protocal as cdn support and other extra features are disabled.
 
+## Features
+1. Install trojan and enable auto restart on failure or reboot.
+2. install auto update services to automatically check updates once a week by deafult.
+3. Auto enable bbr algorithm
+
 ## Usage
 ### trojan-go
 ```bash
