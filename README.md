@@ -1,7 +1,7 @@
 # trojan-helper
 <hr>
 
-[trojan-cfw]: https://github.com/trojan-gfw/trojan
+[trojan]: https://github.com/trojan-gfw/trojan
 [trojan-go]: https://github.com/p4gefau1t/trojan-go
 [trojan-r]: https://github.com/p4gefau1t/trojan-r
 
@@ -9,7 +9,7 @@
 **These scripts only works on Debian, and only Debian 10 and Debian 9 are tested.**
 
 ## About
-This is a collection of scripts to automate the installation of [trojan-go], [trojan-r], and more implementations to be added. all implementations are installed with maximum compatibility with the original [trojan-cfw] protocal as cdn support and other extra features are disabled.
+This is a collection of scripts to automate the installation of [trojan-go], [trojan-r], and more implementations to be added. all implementations are installed with maximum compatibility with the original [trojan] protocal as cdn support and other extra features are disabled.
 
 ## Features
 1. Install trojan and enable auto restart on failure or reboot.
