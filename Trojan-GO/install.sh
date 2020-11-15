@@ -107,6 +107,8 @@ cp $payload_dir/trojan.conf /etc/nginx/conf.d/
 # Rename default conf after we obtained a certificate, we need nginx running to get the certificate.
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
 
+blue "Enable BBR"
+
 
 blue "Enable services"
 systemctl enable nginx trojan-go trojan-go-update.timer
