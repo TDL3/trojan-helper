@@ -6,7 +6,7 @@
 [trojan-r]: https://github.com/p4gefau1t/trojan-r
 
 ## Please Note:
-**These scripts only works on Debian, Debian 10 and Debian 9 are tested.**
+**These scripts only works on Debian, and only Debian 10 and Debian 9 are tested.**
 
 ## About
 This is a collection of scripts to automate the installation of [trojan-go], [trojan-r], and more implementations to be added. all implementations are installed with maximum compatibility with the original [trojan-cfw] protocal as cdn support and other extra features are disabled.
