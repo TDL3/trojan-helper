@@ -1,0 +1,16 @@
+[Unit]
+Description=Trojan-R - An unidentifiable mechanism that helps you bypass GFW
+Documentation=https://github.com/p4gefau1t/trojan-r
+After=network.target nss-lookup.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/etc/trojan-r/trojan-r --config /etc/trojan-r/server.toml
+Restart=on-failure
+RestartSec=10
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
