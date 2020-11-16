@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script only works on Debian, Debian 10 and Debian 9 are tested.
+# This script only works on Debian, and only Debian 10 and Debian 9 are tested.
 
 if [ "$EUID" != 0 ]; then
     sudo "$0" "$@"
