@@ -123,7 +123,7 @@ blue "Enable services."
 systemctl enable nginx trojan-go trojan-go-update.timer
 systemctl restart nginx
 systemctl start trojan-go trojan-go-update.timer
-systemctl status nginx 
-systemctl status trojan-go
+systemctl status nginx | head -10
+systemctl status trojan-go | head -10
 lsmod | grep tcp_bbr
 bold "Trojan-GO installation finished."
