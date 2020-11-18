@@ -127,4 +127,4 @@ systemctl start trojan-go trojan-go-update.timer
 systemctl status nginx | head -10
 systemctl status trojan-go | head -10
 lsmod | grep tcp_bbr
-bold "Trojan-GO installation finished."
+green "Trojan-GO installation finished."
