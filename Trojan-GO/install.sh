@@ -76,6 +76,7 @@ apt install nginx -y
 
 blue "Config nginx."
 mkdir -p /var/www/html
+chown -R nginx:nginx /var/www
 unzip -d /var/www/html $payload_dir/trojan.zip
 
 
