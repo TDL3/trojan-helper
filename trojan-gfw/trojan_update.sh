@@ -41,6 +41,10 @@ regex="[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}"
 # If |& is used, the standard error of command is connected to command2's standard input through the pipe.
 # Why trojan-gfw output vesion info to stderr, why? why? why?
 local_version=$($trojan_dir/trojan --version |& head -1 | grep -oP $regex)
+if [[ -z "$local_version" ]]; then
+    red "Can not get local version of trojan"
+    local_version="0.0.0"
+fi
 remote_version=$(echo $url | grep -oP $regex | tail -1)
 blue "Local version: "$local_version
 blue "Remote version: "$remote_version
