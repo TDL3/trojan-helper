@@ -1,6 +1,11 @@
 #!/bin/bash
 #This script automatically updates trojan-gfw
 
+if [ "$EUID" != 0 ]; then
+    sudo "$0" "$@"
+    exit $?
+fi
+
 red(){
     echo -e "\033[31m\033[01m$1\033[0m"
 }
@@ -23,12 +28,6 @@ if [[ -z "$trojan_dir" ]]; then
     yellow "trojan_dir variable not set, defaults to "$trojan_dir
 fi
 
-if [ "$EUID" != 0 ]; then
-    sudo "$0" "$@"
-    exit $?
-fi
-
-
 url=$(
 curl -s https://api.github.com/repos/trojan-gfw/trojan/releases \
 | grep "browser_download_url.*linux-amd64.tar.xz" \
@@ -36,14 +35,13 @@ curl -s https://api.github.com/repos/trojan-gfw/trojan/releases \
 | cut -d '"' -f 4)
 blue "Download url is "$url
 filename=$(basename "$url")
-echo $filename 
 
 # This regex matches version strings like x.x.x 
 regex="[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}"
 # If |& is used, the standard error of command is connected to command2's standard input through the pipe.
 # Why trojan-gfw output vesion info to stderr, why? why? why?
 local_version=$($trojan_dir/trojan --version |& head -1 | grep -oP $regex)
-remote_version=$(echo $url | grep -oP $regex)
+remote_version=$(echo $url | grep -oP $regex | tail -1)
 blue "Local version: "$local_version
 blue "Remote version: "$remote_version
 
@@ -73,7 +71,7 @@ if [[ ! -f $temp_dir/$filename ]]; then
 fi
 
 blue "Extracting archive"
-tar -xf --overwrite $temp_dir/$filename -C $temp_dir
+tar -xf $temp_dir/$filename -C $temp_dir
 blue "Extraction completed"
 
 blue "Stopping trojan-gfw service"
@@ -81,10 +79,7 @@ systemctl stop trojan
 blue "trojan-gfw service stopped"
 
 blue "Updating files"
-cp -f $temp_dir/trojan \
-$temp_dir/geoip.dat \
-$temp_dir/geosite.dat \
-${trojan_dir}/
+cp -f $temp_dir/trojan/trojan ${trojan_dir}
 blue "Files updated"
 
 blue "Starting trojan-gfw service"
