@@ -19,8 +19,8 @@ bold(){
 
 if [[ -z "$trojan_dir" ]]; then
 # change this to where trojan-go is located, do not put a trailing slash in it
-    yellow "trojan_dir variable not set, defaults to /etc/trojan-go"
     trojan_dir="/etc/trojan-go"
+    yellow "trojan_dir variable not set, defaults to "$trojan_dir
 fi
 
 if [ "$EUID" != 0 ]; then

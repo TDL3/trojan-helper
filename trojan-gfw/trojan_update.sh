@@ -19,8 +19,8 @@ bold(){
 
 if [[ -z "$trojan_dir" ]]; then
 # change this to where trojan-gfw is located, do not put a trailing slash in it
-    yellow "trojan_dir variable not set, defaults to /etc/trojan"
     trojan_dir="/etc/trojan"
+    yellow "trojan_dir variable not set, defaults to "$trojan_dir
 fi
 
 if [ "$EUID" != 0 ]; then
@@ -36,18 +36,20 @@ curl -s https://api.github.com/repos/trojan-gfw/trojan/releases \
 | cut -d '"' -f 4)
 blue "Download url is "$url
 filename=$(basename "$url")
-echo filename 
+echo $filename 
 
 # This regex matches version strings like x.x.x 
 regex="[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}"
-local_version=$($trojan_dir/trojan --version | head -1 | grep -oP $regex)
+# If |& is used, the standard error of command is connected to command2's standard input through the pipe.
+# Why trojan-gfw output vesion info to stderr, why? why? why?
+local_version=$($trojan_dir/trojan --version |& head -1 | grep -oP $regex)
 remote_version=$(echo $url | grep -oP $regex)
 blue "Local version: "$local_version
 blue "Remote version: "$remote_version
 
 temp_dir=$trojan_dir/temp/$remote_version
 
-if [[ $local_version != $remote_version ]]; then
+if [ $local_version != $remote_version ]; then
     blue "Update found"
 else
     red "No update found"
@@ -59,9 +61,9 @@ mkdir -p $temp_dir
 blue "$temp_dir created"
 
 # check if the file needs download already existed
-if [ ! -f $temp_dir/$filename ]; then
-    wget -P $temp_dir $url
+if [[ ! -f $temp_dir/$filename ]]; then
     blue "Downloading trojan-gfw v"$remote_version
+    wget -P $temp_dir $url
     if [ $? != 0 ] ; then
         red "Download failed"
         exit -1
