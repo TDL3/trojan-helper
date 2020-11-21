@@ -1,0 +1,10 @@
+[Unit]
+Description=Trojan-go scheduled update
+
+[Service]
+Type=simple
+ExecStart=/etc/trojan-go/trojan_go_update.sh
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
