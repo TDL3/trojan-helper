@@ -28,8 +28,7 @@ green "  Enter the domain name which point to this machine's ip    "
 green " ========================================================== "
 read -p "Enter the domain name here: " domain
 trojan_dir="/etc/trojan-go"
-# payload_dir="$(dirname "$payload")/trojan_payload"
-payload_dir="$(realpath "$payload")/trojan_payload"
+payload_dir="/tmp/trojan_go_payload"
 
 function compareRealIpWithLocalIp(){
 
