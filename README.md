@@ -15,11 +15,3 @@ This is a collection of scripts to automate the installation of [trojan-go], [tr
 1. Install trojan and enable auto restart on failure or reboot.
 2. install auto update services to automatically check updates once a week by deafult.
 3. Auto enable bbr algorithm
-
-## Usage
-### trojan-go
-```bash
-curl -O https://raw.githubusercontent.com/TDL3/trojan-helper/main/Trojan-go/install.sh?token=PUT_YOUR_TOKEN_HERE && chmod +x ./install.sh && ./install.sh
-```
-### trojan-r
-Waitting for [trojan-r] to enter beta
