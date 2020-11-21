@@ -83,7 +83,7 @@ cp -f $temp_dir/trojan/trojan ${trojan_dir}
 blue "Files updated"
 
 blue "Starting trojan-gfw service"
-systemctl start trojan
-systemctl status trojan
+systemctl start trojan | head -10
+systemctl status trojan | head -10
 blue "trojan-gfw service started"
 blue "UPDATE COMPLETED"

@@ -27,7 +27,7 @@ green " ========================================================== "
 green "  Enter the domain name which point to this machine's ip    "
 green " ========================================================== "
 read -p "Enter the domain name here: " domain
-trojan_dir="/etc/trojan-go"
+trojan_dir="/etc/trojan"
 # payload_dir="$(dirname "$payload")/trojan_payload"
 payload_dir="$(realpath "$payload")/trojan_payload"
 
@@ -88,22 +88,22 @@ systemctl start nginx
 certbot certonly --nginx -d $domain --register-unsafely-without-email --agree-tos
 
 
-blue "Install Trojan-GO."
-source $payload_dir/trojan_go_update.sh
-cp $payload_dir/trojan_go_update.sh $trojan_dir
+blue "Install trojan-gfw."
+source $payload_dir/trojan_update.sh
+cp $payload_dir/trojan_update.sh $trojan_dir
 
 
 blue "Update configs"
 sed -i "s/SERVERNAME/$domain/g" $payload_dir/config.json
 sed -i "s/SERVERNAME/$domain/g" $payload_dir/trojan.conf
 green " ============================== "
-green "   Setting trojan-go password   "
+green "   Setting trojan password   "
 green " ============================== "
-read -p "Enter trojan-go password here: " password
+read -p "Enter trojan password here: " password
 sed -i "s/PASSWORD/$password/" $payload_dir/config.json
 
 blue "Config Services."
-cp $payload_dir/trojan-go* /etc/systemd/system/
+cp $payload_dir/trojan* /etc/systemd/system/
 cp $payload_dir/config.json $trojan_dir
 cp $payload_dir/trojan.conf /etc/nginx/conf.d/
 # Rename default conf after we obtained a certificate, we need nginx running to get the certificate.
@@ -118,10 +118,10 @@ else
 fi
 
 blue "Enable services."
-systemctl enable nginx trojan-go trojan-go-update.timer
+systemctl enable nginx trojan trojan-update.timer
 systemctl restart nginx
-systemctl start trojan-go trojan-go-update.timer
+systemctl start trojan trojan-update.timer
 systemctl status nginx | head -10
-systemctl status trojan-go | head -10
+systemctl status trojan | head -10
 lsmod | grep tcp_bbr
-green "Trojan-GO installation finished."
+green "trojan-gfw installation finished."

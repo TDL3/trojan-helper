@@ -85,7 +85,7 @@ ${trojan_dir}/
 blue "Files updated"
 
 blue "Starting trojan-go service"
-systemctl start trojan-go
-systemctl status trojan-go
+systemctl start trojan-go | head -10
+systemctl status trojan-go | head -10
 blue "trojan-go service started"
 blue "UPDATE COMPLETED"
