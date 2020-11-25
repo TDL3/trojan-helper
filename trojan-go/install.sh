@@ -46,7 +46,7 @@ function compareRealIpWithLocalIp(){
     if [ -n $1 ]; then
         configNetworkRealIp=`ping $1 -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
         # ipconfig.io
-        configNetworkLocalIp=`curl v4.ident.me`
+        configNetworkLocalIp=`curl -s v4.ident.me`
 
         green " ================================================== "
         green "    Domain relvoles to ${configNetworkRealIp}       "

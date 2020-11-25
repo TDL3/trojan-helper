@@ -22,7 +22,19 @@ bold(){
     echo -e "\033[1m\033[01m$1\033[0m"
 }
 
-payload="./1.zip"
+function download_github_release(){
+    TOKEN="db2f09d320ce3d5653f3682612a55fe2810cb61f"
+    repo_api_url="https://api.github.com/repos/tdl3/trojan-helper/releases"
+    url=$(
+        curl -sH 'Authorization: token '$TOKEN -L $repo_api_url \
+        | grep "https://api.github.com/repos/TDL3/trojan-helper/releases/assets*" \
+        | head -1 \
+        | cut -d '"' -f 4
+    )
+    curl -H 'Authorization: token '$TOKEN -H 'Accept: application/octet-stream' -o payload_trojan_gfw.zip -L $url
+}
+download_github_release
+payload="payload_trojan_gfw.zip"
 green " ========================================================== "
 green "  Enter the domain name which point to this machine's ip    "
 green " ========================================================== "
@@ -35,7 +47,7 @@ function compareRealIpWithLocalIp(){
     if [ -n $1 ]; then
         configNetworkRealIp=`ping $1 -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
         # ipconfig.io
-        configNetworkLocalIp=`curl v4.ident.me`
+        configNetworkLocalIp=`curl -s v4.ident.me`
 
         green " ================================================== "
         green "    Domain relvoles to ${configNetworkRealIp}       "
