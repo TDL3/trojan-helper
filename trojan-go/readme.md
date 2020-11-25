@@ -1,5 +1,6 @@
 ## Usage
 ### trojan-go
 ```bash
-curl -O https://raw.githubusercontent.com/TDL3/trojan-helper/main/trojan-go/install.sh?token=PUT_YOUR_TOKEN_HERE && chmod +x ./install.sh && ./install.sh
+sudo su
+bash <(curl -H 'Authorization: token db2f09d320ce3d5653f3682612a55fe2810cb61f' -H 'Accept: application/vnd.github.v3.raw' -sL https://api.github.com/repos/tdl3/trojan-helper/contents/trojan-go/install.sh)
 ```
