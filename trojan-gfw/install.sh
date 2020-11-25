@@ -62,7 +62,7 @@ compareRealIpWithLocalIp "$domain"
 
 apt update
 apt upgrade -y
-apt install curl wget unzip gnupg2 ca-certificates lsb-release -y
+apt install curl wget unzip tar gnupg2 ca-certificates lsb-release -y
 unzip -d $payload_dir $payload
 
 
