@@ -14,5 +14,15 @@
         "sni": "SERVERNAME",
         "fallback_addr": "127.0.0.1",
         "fallback_port": 1234
+    },
+      "websocket": {
+        "enabled": false,
+        "path": "/QuantumCompute",
+        "host": "SERVERNAME"
+    },
+      "shadowsocks": {
+        "enabled": false,
+        "method": "AES-128-GCM",
+        "password": "NfM63oEH9YR4UsKynYQk"
     }
 }
