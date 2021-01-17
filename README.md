@@ -6,12 +6,12 @@
 [trojan-r]: https://github.com/p4gefau1t/trojan-r
 
 ## Please Note:
-**These scripts only works on Debian, and only Debian 10 and Debian 9 are tested.**
+**These scripts only work on Debian, and only Debian 10 and Debian 9 are tested.**
 
 ## About
-This is a collection of scripts to automate the installation of [trojan-go], [trojan-r], and more implementations to be added. all implementations are installed with maximum compatibility with the original [trojan] protocal as cdn support and other extra features are disabled.
+This is a collection of scripts to automate the deployment of [trojan-go], [trojan-r], and more implementations of [trojan] will be added. all implementations are deployed with maximum compatibility with the original [trojan] protocol, things like CDN support, shadowsocks AEAD, and other extra features are disabled by default.
 
 ## Features
-1. Install trojan and enable auto restart on failure or reboot.
-2. install auto update services to automatically check updates once a week by deafult.
-3. Auto enable bbr algorithm
+1. Deploy trojan and enable auto restart on failure or reboot.
+2. Deploy auto-update services to automatically check updates once a week by default.
+3. Auto enable tcp-bbr
