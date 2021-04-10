@@ -22,18 +22,6 @@ bold(){
     echo -e "\033[1m\033[01m$1\033[0m"
 }
 
-function download_github_release(){
-    TOKEN="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"
-    repo_api_url="https://api.github.com/repos/tdl3/trojan-helper/releases"
-    url=$(
-        curl -sH 'Authorization: token '$TOKEN -L $repo_api_url \
-        | grep "https://api.github.com/repos/TDL3/trojan-helper/releases/assets*" \
-        | head -1 \
-        | cut -d '"' -f 4
-    )
-    curl -H 'Authorization: token '$TOKEN -H 'Accept: application/octet-stream' -o payload_trojan_gfw.zip -L $url
-}
-download_github_release
 payload="payload_trojan_gfw.zip"
 green " ========================================================== "
 green "  Enter the domain name which point to this machine's ip    "
@@ -42,7 +30,7 @@ read -p "Enter the domain name here: " domain
 trojan_dir="/etc/trojan"
 payload_dir="/tmp/trojan_payload"
 
-function compareRealIpWithLocalIp(){
+function isIpMatch(){
 
     if [ -n $1 ]; then
         configNetworkRealIp=`ping $1 -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
@@ -70,11 +58,28 @@ function compareRealIpWithLocalIp(){
     fi
 }
 
-compareRealIpWithLocalIp "$domain"
+isIpMatch "$domain"
 
 apt update
 apt upgrade -y
-apt install curl wget unzip tar gnupg2 ca-certificates lsb-release -y
+apt install curl wget unzip tar gnupg2 ca-certificates lsb-release jq -y
+
+function download_github_release(){
+    TOKEN="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"
+    repo_api_url="https://api.github.com/repos/tdl3/trojan-helper/releases"
+    parser=".[0].assets | map(select(.name == \"$payload\"))[0].id"
+    assest_id=$(
+        curl -sH 'Authorization: token '$TOKEN -L $repo_api_url \
+        | jq "$parser"
+    )
+    curl \
+    -H 'Authorization: token '$TOKEN \
+    -H 'Accept: application/octet-stream' \
+    -o $payload \
+    -L "$repo_api_url/assets/$assest_id"
+}
+download_github_release
+
 unzip -d $payload_dir $payload
 
 
