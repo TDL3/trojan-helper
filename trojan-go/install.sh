@@ -22,7 +22,7 @@ bold(){
     echo -e "\033[1m\033[01m$1\033[0m"
 }
 function download_github_release(){
-    TOKEN="db2f09d320ce3d5653f3682612a55fe2810cb61f"
+    TOKEN="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"
     repo_api_url="https://api.github.com/repos/tdl3/trojan-helper/releases"
     url=$(
         curl -sH 'Authorization: token '$TOKEN -L $repo_api_url \
