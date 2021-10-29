@@ -112,7 +112,7 @@ chown -R nginx:nginx /var/www
 
 blue "Install certbot."
 # Install this after nginx is necessary because python-certbot-nginx depends on nginx.
-apt install certbot python-certbot-nginx -y
+apt install certbot python3-certbot-nginx -y
 blue "Obtain tls certificate from Let's Encrypt."
 systemctl start nginx
 certbot certonly --nginx -d $domain --register-unsafely-without-email --agree-tos
